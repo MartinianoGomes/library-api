@@ -1,0 +1,92 @@
+import mongoose from 'mongoose';
+import { Book } from '../models/bookModel.js';
+
+export class BookController {
+
+    static async createBook(req, res) {
+        try {
+            const {
+                title,
+                author,
+                genre,
+                price,
+                quantityInStorage
+            } = req.body;
+
+            const book = await Book.create({
+                title,
+                author,
+                genre,
+                price,
+                quantityInStorage
+            })
+
+            return res.status(201).json(book);
+        } catch (error) {
+            return res.status(500).json({ error: "Erro ao criar o livor: " + error.message })
+        }
+    }
+
+    static async deleteBook(req, res) {
+        try {
+            const { id } = req.params
+            const book = await Book.findById(id)
+
+            if (!book) return res.status(404).json({ error: "Livro não encontrado!"})
+
+            await book.deleteOne()
+            return res.json({ message: "Livro deletado com sucesso!" })
+        } catch (error) {
+            return res.status(500).json({ error: "Erro ao deletar o livor: " + error.message })
+        }
+    }
+
+    static async updateBook(req, res) {
+        try {
+            const { id } = req.params
+
+            const data = req.body
+
+            console.log(data)
+
+            const book = await Book.findByIdAndUpdate(id, data)
+
+            if (!book) return res.status(404).json({ error: "Livro não encontrado!" })
+
+            await book.save()
+            return res.status(200).json({ message: "Livro alterado com sucesso!" })
+        } catch (error) {
+            return res.status(500).json({ error: "Erro ao atualizar o livor: " + error.message })
+        }
+    }
+
+    static async listBooks(req, res) {
+        try {
+            let books = await Book.find()
+
+            return res.status(200).json({ books })
+        } catch (error) {
+            return res.status(500).json({ error: "Erro na busca pelos livros: " + error.message })
+        }
+    }
+}
+
+/*
+app.put('/', async (req, res) => {
+    const book = await Book.findByIdAndUpdate(req.params.id, {
+        title: req.body.title,
+        author: req.body.author,
+        genre: req.body.genre,
+        price: req.body.price,
+        quantityInStorage: req.body.quantityInStorage
+    }, {
+        new: true
+    })
+})
+
+app.get('/', async (req, res) => {
+    const books = await Book.find()
+
+    return res.send(books)
+})
+*/
