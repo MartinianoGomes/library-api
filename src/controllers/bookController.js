@@ -70,23 +70,3 @@ export class BookController {
         }
     }
 }
-
-/*
-app.put('/', async (req, res) => {
-    const book = await Book.findByIdAndUpdate(req.params.id, {
-        title: req.body.title,
-        author: req.body.author,
-        genre: req.body.genre,
-        price: req.body.price,
-        quantityInStorage: req.body.quantityInStorage
-    }, {
-        new: true
-    })
-})
-
-app.get('/', async (req, res) => {
-    const books = await Book.find()
-
-    return res.send(books)
-})
-*/

@@ -10,3 +10,6 @@ routerBook.get('/book/', BookController.listBooks)
 routerBook.put('/book/:id', BookController.updateBook)
 
 export { routerBook }
+
+// Informação importante: Caso haja uma expansão
+// futura do projeto, seria interessante padronizar estas rotas.
