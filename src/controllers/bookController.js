@@ -1,8 +1,6 @@
-import mongoose from 'mongoose';
 import { Book } from '../models/bookModel.js';
 
 export class BookController {
-
     static async createBook(req, res) {
         try {
             const {
