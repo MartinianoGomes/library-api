@@ -19,6 +19,8 @@ export class BookController {
                 quantityInStorage
             })
 
+            if (book) return res.status(400).json({ error: "O livro já existe!" })
+
             return res.status(201).json(book);
         } catch (error) {
             return res.status(500).json({ error: "Erro ao criar o livor: " + error.message })
@@ -33,7 +35,8 @@ export class BookController {
             if (!book) return res.status(404).json({ error: "Livro não encontrado!"})
 
             await book.deleteOne()
-            return res.json({ message: "Livro deletado com sucesso!" })
+
+            return res.status(200).json({ message: "Livro deletado com sucesso!" })
         } catch (error) {
             return res.status(500).json({ error: "Erro ao deletar o livor: " + error.message })
         }
@@ -52,6 +55,7 @@ export class BookController {
             if (!book) return res.status(404).json({ error: "Livro não encontrado!" })
 
             await book.save()
+
             return res.status(200).json({ message: "Livro alterado com sucesso!" })
         } catch (error) {
             return res.status(500).json({ error: "Erro ao atualizar o livor: " + error.message })
@@ -61,6 +65,8 @@ export class BookController {
     static async listBooks(req, res) {
         try {
             let books = await Book.find()
+
+            if (!books) return res.status(404).json({ error: "O recurso solicitado não foi encontrado" })
 
             return res.status(200).json({ books })
         } catch (error) {
