@@ -9,20 +9,20 @@ Esta é uma API para gerência de uma livraria. Ela permite criar, deletar, atua
 A estrutura do projeto é a seguinte:
 
 ```sh
-api/
-    package.json
-    src/
-        controllers/
-            bookController.js
-        index.js
-        models/
-            bookModel.js
-        routes/
-            routes.js
-            routesPaths/
-                bookRoutes.js
-        swagger.json
-    .gitignore
+├── api/
+│   ├── package.json
+│   ├── src/
+│   │   └── controllers/
+│   │   │   └── bookController.js
+│   │   └── index.js
+│   │   └── models/
+│   │   │   └── bookModel.js
+│   │   └── routes/
+│   │   │   └── routes.js
+│   │   │   └── routesPaths/
+│   │   │   │   └── bookRoutes.js
+│   │   └── swagger.json
+│   └──.gitignore
 ```
 
 ## Arquivos e Diretórios
