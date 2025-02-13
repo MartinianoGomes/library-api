@@ -1,0 +1,19 @@
+import { createConnection } from 'mysql2/promise';
+
+const dbConfig = {
+    host: 'localhost',
+    user: 'seu-usuario',
+    password: 'sua-senha',
+    fatabase: 'nome-do-banco'
+}
+
+export const connect = async () => {
+    try {
+        const connection = await createConnection(dbConfig)
+        console.log('Conexão com o banco de dados realizada com sucesso!')
+        return connection
+    } catch (error) {
+        console.error('Erro ao tentar conectar com o banco de dados:', error)
+        return error
+    }
+}
