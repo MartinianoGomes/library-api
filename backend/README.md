@@ -10,18 +10,18 @@ A estrutura do projeto é a seguinte:
 
 ```sh
 ├── api/
-│   ├── package.json
 │   ├── src/
-│   │   └── controllers/
+│   │   ├── controllers/
 │   │   │   └── bookController.js
-│   │   └── index.js
-│   │   └── models/
+│   │   ├── models/
 │   │   │   └── bookModel.js
-│   │   └── routes/
-│   │   │   └── routes.js
-│   │   │   └── routesPaths/
+│   │   ├── routes/
+│   │   │   ├── routesPaths/
 │   │   │   │   └── bookRoutes.js
+│   │   │   └── routes.js
+│   │   ├── index.js
 │   │   └── swagger.json
+│   ├── package.json
 │   └──.gitignore
 ```
 
