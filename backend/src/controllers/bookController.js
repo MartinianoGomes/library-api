@@ -1,76 +1,39 @@
-import { Book } from '../models/bookModel.js';
+const Book = require('../models/bookModel');
+const { connect } = require('../config/dbconfig');
 
-export class BookController {
-    static async createBook(req, res) {
-        try {
-            const {
-                title,
-                author,
-                genre,
-                price,
-                quantityInStorage
-            } = req.body;
+class BookController {
+    async getAllBooks(req, res) {
+        const connection = await connect();
+        const books = await Book.findAll(connection);
+        res.json(books);
+    }
 
-            const book = await Book.create({
-                title,
-                author,
-                genre,
-                price,
-                quantityInStorage
-            })
-
-            if (book) return res.status(400).json({ error: "O livro já existe!" })
-
-            return res.status(201).json(book);
-        } catch (error) {
-            return res.status(500).json({ error: "Erro ao criar o livor: " + error.message })
+    async getBookById(req, res) {
+        const connection = await connect();
+        const book = await Book.findById(connection, req.params.id);
+        if (book) {
+            res.json(book);
+        } else {
+            res.status(404).send('Book not found');
         }
     }
 
-    static async deleteBook(req, res) {
-        try {
-            const { id } = req.params
-            const book = await Book.findById(id)
-
-            if (!book) return res.status(404).json({ error: "Livro não encontrado!"})
-
-            await book.deleteOne()
-
-            return res.status(200).json({ message: "Livro deletado com sucesso!" })
-        } catch (error) {
-            return res.status(500).json({ error: "Erro ao deletar o livor: " + error.message })
-        }
+    async createBook(req, res) {
+        const connection = await connect();
+        const newBook = new Book(null, req.body.title, req.body.author, req.body.publishedDate);
+        const bookId = await Book.create(connection, newBook);
+        res.status(201).json({ id: bookId });
     }
 
-    static async updateBook(req, res) {
-        try {
-            const { id } = req.params
-
-            const data = req.body
-
-            console.log(data)
-
-            const book = await Book.findByIdAndUpdate(id, data)
-
-            if (!book) return res.status(404).json({ error: "Livro não encontrado!" })
-
-            await book.save()
-
-            return res.status(200).json({ message: "Livro alterado com sucesso!" })
-        } catch (error) {
-            return res.status(500).json({ error: "Erro ao atualizar o livor: " + error.message })
-        }
-    }
-
-    static async listBooks(req, res) {
-        try {
-            let books = await Book.find()
-
-            if (!books) return res.status(404).json({ error: "O recurso solicitado não foi encontrado" })
-
-            return res.status(200).json({ books })
-        } catch (error) {
-            return res.status(500).json({ error: "Erro na busca pelos livros: " + error.message })
+    async deleteBook(req, res) {
+        const connection = await connect();
+        const success = await Book.delete(connection, req.params.id);
+        if (success) {
+            res.status(204).send();
+        } else {
+            res.status(404).send('Book not found');
         }
     }
 }
+
+module.exports = new BookController();
