@@ -1,15 +1,11 @@
-import express from "express"
-import { BookController } from "../../controllers/bookController.js"
+const express = require('express');
+const bookController = require('../../controllers/bookController');
 
-const router = express.Router()
+const router = express.Router();
 
-// Aqui deve ficar as rotas do sistema.
-router.post('/create', BookController.createBook)
-router.delete('/delete/:id', BookController.deleteBook)
-router.get('/listAll/', BookController.listBooks)
-router.put('/update/:id', BookController.updateBook)
+router.get('/listAll', bookController.getAllBooks.bind(bookController));
+router.get('/getBook/:id', bookController.getBookById.bind(bookController));
+router.post('/create', bookController.createBook.bind(bookController));
+router.delete('delete/:id', bookController.deleteBook.bind(bookController));
 
-export default router
-
-// Informação importante: Caso haja uma expansão
-// futura do projeto, seria interessante padronizar estas rotas.
+module.exports = router;
