@@ -1,10 +1,37 @@
-import mongoose from "mongoose"
+class Book {
+    constructor(id, title, author, publishedDate) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.publishedDate = publishedDate;
+    }
 
-//Esta é a tabela onde será guardada as informações dos livros no banco de dados.
-export const Book = mongoose.model('Book', {
-    title: String,
-    author: String,
-    genre: String,
-    price: String,
-    quantityInStorage: Number
-})
+    static async create(connection, book) {
+        const [result] = await connection.execute(
+            'INSERT INTO books (title, author, publishedDate) VALUES (?, ?, ?)',
+            [book.title, book.author, book.publishedDate]
+        );
+        return result.insertId;
+    }
+
+    static async findAll(connection) {
+        const [rows] = await connection.execute('SELECT * FROM books');
+        return rows.map(row => new Book(row.id, row.title, row.author, row.publishedDate));
+    }
+
+    static async findById(connection, id) {
+        const [rows] = await connection.execute('SELECT * FROM books WHERE id = ?', [id]);
+        if (rows.length > 0) {
+            const row = rows[0];
+            return new Book(row.id, row.title, row.author, row.publishedDate);
+        }
+        return null;
+    }
+
+    static async delete(connection, id) {
+        const [result] = await connection.execute('DELETE FROM books WHERE id = ?', [id]);
+        return result.affectedRows > 0;
+    }
+}
+
+module.exports = Book;
