@@ -91,3 +91,7 @@ O servidor estará disponível em `http://localhost:3000`.
 3. Commit suas mudanças (git commit -am 'Adiciona nova feature').
 4. Faça push para a branch (git push origin feature/nova-feature).
 5. Crie um novo Pull Request.
+
+## Autor
+
+Martiniano Gomes.
