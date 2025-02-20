@@ -21,8 +21,8 @@
 
 // startServer();
 
-const express = require('express');
-const bookRoutes = require('./routes/routesPaths/bookRoutes');
+import express from 'express';
+import bookRoutes from './routes/routesPaths/bookRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
