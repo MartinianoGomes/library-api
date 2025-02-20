@@ -1,5 +1,5 @@
-const Book = require('../models/bookModel');
-const { connect } = require('../config/dbconfig');
+import Book from '../models/bookModel.js';
+import connect from '../config/dbconfig.js';
 
 class BookController {
     async getAllBooks(req, res) {
@@ -36,4 +36,4 @@ class BookController {
     }
 }
 
-module.exports = new BookController();
+export default new BookController();
