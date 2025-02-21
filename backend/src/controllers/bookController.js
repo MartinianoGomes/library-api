@@ -49,14 +49,20 @@ export class BookController {
                 publishedDate
             })
 
-            if (!book) {
-                return res.status(400).json({ error: 'Erro ao criar "livro"' })
-            };
-
             return res.status(201).json(book);
         } catch (error) {
             console.error('Erro ao criar "livro": ', error);
             return res.status(500).json({ error: 'Erro ao criar "livro"' });
+        }
+    }
+
+    static async getAll(req, res) {
+        try {
+            const books = await Book.findAll();
+            return res.status(200).json(books);
+        } catch (error) {
+            console.error('Erro ao buscar "livros": ', error);
+            return res.status(500).json({ error: 'Erro ao buscar "livros"' });
         }
     }
 }
