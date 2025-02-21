@@ -1,8 +1,8 @@
 import Book from '../models/bookModel.js';
 import connect from '../config/dbconfig.js';
 
-class BookController {
-    async getAllBooks(req, res) {
+export class BookController {
+    /* async getAllBooks(req, res) {
         const connection = await connect();
         const books = await Book.findAll(connection);
         res.json(books);
@@ -33,7 +33,30 @@ class BookController {
         } else {
             res.status(404).send('Book not found');
         }
+    } */
+
+    static async createBook(req, res) {
+        try {
+            const {
+                title,
+                author,
+                publishedDate
+            } = req.body;
+
+            const book = await Book.create ({
+                title,
+                author,
+                publishedDate
+            })
+
+            if (!book) {
+                return res.status(400).json({ error: 'Erro ao criar "livro"' })
+            };
+
+            return res.status(201).json(book);
+        } catch (error) {
+            console.error('Erro ao criar "livro": ', error);
+            return res.status(500).json({ error: 'Erro ao criar "livro"' });
+        }
     }
 }
-
-export default new BookController();
