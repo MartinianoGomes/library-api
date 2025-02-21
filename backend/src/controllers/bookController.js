@@ -65,4 +65,20 @@ export class BookController {
             return res.status(500).json({ error: 'Erro ao buscar "livros"' });
         }
     }
+
+    static async getById(req, res) {
+        try {
+            const { id } = req.params;
+            const book = await Book.findById(id);
+
+            if (!book) {
+                return res.status(404).json({ error: 'Livro não encontrado' });
+            }
+
+            return res.status(200).json(book);
+        } catch (error) {
+            console.error('Erro ao buscar "livro": ', error);
+            return res.status(500).json({ error: 'Erro ao buscar "livro"' });
+        }
+    }
 }
