@@ -25,6 +25,7 @@ import express from 'express';
 import cors from 'cors';
 import "dotenv/config";
 import bookRoutes from './routes/routesPaths/bookRoutes.js';
+import sequelize from './config/dbconfig.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
