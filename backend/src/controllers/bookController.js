@@ -81,4 +81,50 @@ export class BookController {
             return res.status(500).json({ error: 'Erro ao buscar "livro"' });
         }
     }
+
+    static async updateBook(req, res) {
+        try {
+            const { id } = req.params;
+            const {
+                title,
+                author,
+                publishedDate
+            } = req.body;
+
+            const book = await Book.findById(id);
+
+            if (!book) {
+                return res.status(404).json({ error: 'Livro não encontrado' });
+            }
+
+            const updatedBook = await Book.update(id, {
+                title,
+                author,
+                publishedDate
+            });
+
+            return res.status(200).json(updatedBook);
+        } catch (error) {
+            console.error('Erro ao atualizar "livro": ', error);
+            return res.status(500).json({ error: 'Erro ao atualizar "livro"' });
+        }
+    }
+
+    static async deleteBook(req, res) {
+        try {
+            const { id } = req.params;
+            const book = await Book.findById(id);
+
+            if (!book) {
+                return res.status(404).json({ error: 'Livro não encontrado' });
+            }
+
+            await Book.delete(id);
+
+            return res.status(204).json({ message: 'Livro deletado com sucesso' });
+        }catch(error) {
+            console.error('Erro ao deletar "livro": ', error);
+            return res.status(500).json({ error: 'Erro ao deletar "livro"' });
+        }
+    }
 }
