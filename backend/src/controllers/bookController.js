@@ -1,5 +1,5 @@
 import Book from '../models/bookModel.js';
-import connect from '../config/dbconfig.js';
+/* import connect from '../config/dbconfig.js'; */
 
 export class BookController {
     /* async getAllBooks(req, res) {
