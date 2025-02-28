@@ -1,4 +1,4 @@
-class Book {
+/* class Book {
     constructor(id, title, author, publishedDate) {
         this.id = id;
         this.title = title;
@@ -34,4 +34,34 @@ class Book {
     }
 }
 
-module.exports = Book;
+export default new Book(); */
+
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/dbconfig.js';
+
+export const Book = sequelize.define(
+    'book',
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        author: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        publishedDate: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+    },
+    {
+        tableName: 'book',
+        timestamps: false
+    }
+)

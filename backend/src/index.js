@@ -21,17 +21,22 @@
 
 // startServer();
 
-const express = require('express');
-const bookRoutes = require('./routes/routesPaths/bookRoutes');
+import express from 'express';
+import cors from 'cors';
+import "dotenv/config";
+import bookRoutes from './routes/routesPaths/bookRoutes.js';
+import sequelize from './config/dbconfig.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
-app.use('/books', bookRoutes);
+app.use('/book', bookRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+sequelize.sync().then(() => {
+    app.listen(PORT, () => {
+        console.log(`Servidor rodando na porta ${PORT}`);
+    })
 });
