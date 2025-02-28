@@ -39,8 +39,8 @@ export default new Book(); */
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/dbconfig.js';
 
-export const Book = sequelize.define('Book', {
-    "Announcement",
+export const Book = sequelize.define(
+    'book',
     {
         id: {
             type: DataTypes.INTEGER,
@@ -51,9 +51,17 @@ export const Book = sequelize.define('Book', {
             type: DataTypes.STRING,
             allowNull: false
         },
+        author: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        publishedDate: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
     },
     {
-        tableName: 'Book',
-        time
+        tableName: 'book',
+        timestamps: false
     }
-})
+)
