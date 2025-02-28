@@ -1,36 +1,28 @@
-# Padrão de Commits
+# Library API
 
-Para manter um histórico de commits organizado e consistente, siga o padrão de commits abaixo. Este padrão é baseado no [Conventional Commits](https://www.conventionalcommits.org/).
+## Descrição
 
-## Estrutura do Commit
+O projeto Library API é uma aplicação backend desenvolvida para gerenciar uma biblioteca de livros. A API permite realizar operações CRUD (Create, Read, Update, Delete) em livros, autores e categorias. Além disso, oferece funcionalidades para buscar livros por diferentes critérios, como título, autor e categoria.
 
-Cada commit deve seguir a estrutura abaixo:
+## Objetivos
 
+Os principais objetivos do projeto são:
 
-### Tipos de Commits
+1. **Gerenciamento de Livros**: Permitir a adição, visualização, atualização e exclusão de livros na biblioteca.
+2. **Gerenciamento de Autores**: Permitir a adição, visualização, atualização e exclusão de autores.
+3. **Gerenciamento de Categorias**: Permitir a adição, visualização, atualização e exclusão de categorias de livros.
+4. **Busca Avançada**: Oferecer funcionalidades de busca para encontrar livros por título, autor ou categoria.
+5. **Autenticação e Autorização**: Implementar mecanismos de autenticação e autorização para garantir a segurança da API.
+6. **Documentação da API**: Fornecer uma documentação clara e detalhada sobre os endpoints da API e como utilizá-los.
 
-- `feat`: Adição de uma nova funcionalidade.
-- `fix`: Correção de um bug.
-- `docs`: Alterações na documentação.
-- `style`: Alterações de formatação, que não afetam o código (espaços em branco, formatação, ponto e vírgula, etc).
-- `refactor`: Alteração de código que não corrige um bug nem adiciona uma funcionalidade.
-- `perf`: Alterações de código que melhoram o desempenho.
-- `test`: Adição ou correção de testes.
-- `build`: Alterações que afetam o sistema de build ou dependências externas (escopos de exemplo: gulp, broccoli, npm).
-- `ci`: Alterações em arquivos e scripts de configuração de CI (exemplo: Travis, Circle, BrowserStack, SauceLabs).
-- `chore`: Outras mudanças que não modificam arquivos de origem ou de teste.
-- `revert`: Reversão de um commit anterior.
+## Tecnologias Utilizadas
 
-### Exemplos de Commits
+- **Node.js**: Plataforma de desenvolvimento backend.
+- **Express**: Framework web para Node.js.
+- **MySQL**: Banco de dados SQL para armazenamento dos dados.
+- **JWT**: JSON Web Tokens para autenticação e autorização.
+- **Swagger**: Ferramenta para documentação da API.
 
-- feat: adicionar endpoint para criação de livros
-- fix: corrigir erro de conexão com o banco de dados
-- docs: atualizar README com instruções de instalação
-- style: corrigir formatação do código
-- refactor: melhorar lógica de validação de dados
-- perf: otimizar consulta ao banco de dados
-- test: adicionar testes para o controlador de livros
-- build: atualizar dependências do npm
-- ci: configurar integração contínua com Travis
-- chore: remover arquivos desnecessários
-- revert: reverter commit abc123
+## Autor
+
+Martiniano Gomes B. C. Neto.
