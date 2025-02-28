@@ -1,4 +1,4 @@
-import Book from '../models/bookModel.js';
+import { Book } from '../models/bookModel.js';
 /* import connect from '../config/dbconfig.js'; */
 
 export class BookController {
@@ -38,12 +38,14 @@ export class BookController {
     static async createBook(req, res) {
         try {
             const {
+                id,
                 title,
                 author,
                 publishedDate
             } = req.body;
 
             const book = await Book.create ({
+                id,
                 title,
                 author,
                 publishedDate
